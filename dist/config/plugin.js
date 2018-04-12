@@ -1,8 +1,15 @@
-/* eslint-disable quotes */
 'use strict';
 
+/* eslint-disable quotes */
 // had enabled by egg
 // exports.static = true;
+
+exports.static = true;
+exports.security = {
+    csrf: {
+        enable: false
+    }
+};
 
 exports.ejs = {
     'enable': true,
@@ -48,5 +55,9 @@ exports.validate = {
 exports.mysql = {
     'enable': true,
     'package': 'egg-mysql'
+};
+exports.jwt = {
+    enable: true,
+    package: "egg-jwt"
 };
 //# sourceMappingURL=plugin.js.map

@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../config/plugin.prod.js"],"names":["exports","alinode","enable","package"],"mappings":";;AACAA,QAAQC,OAAR,GAAkB;AACdC,YAAQ,IADM;AAEdC,aAAS;AAFK,CAAlB","file":"plugin.prod.js","sourcesContent":["\nexports.alinode = {\n    enable: true,\n    package: 'egg-alinode'\n};\n"]}

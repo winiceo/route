@@ -5,23 +5,16 @@ var path = require('path');
 module.exports = function (appInfo) {
     var config = {};
 
-    config.name = 'CNode技术社区';
-
-    config.description = 'CNode：Node.js专业中文社区';
-
-    config.site_logo = '/public/images/cnodejs_light.svg';
-
-    config.site_icon = '/public/images/cnode_icon_32.png';
-
+    config.name = 'BeeRoute Api';
     // debug 为 true 时，用于本地调试
-    config.debug = true;
+    config.debug = false;
 
     // use for cookie sign key, should change to your own and keep security
     config.keys = appInfo.name + '_1519887194138_3450';
 
     config.host = 'http://cnodejs.org';
 
-    config.session_secret = 'node_club_secret'; // 务必修改
+    config.session_secret = 'beelet_secret'; // 务必修改
 
     // add your config here
     config.middleware = ['locals', 'authUser', 'blockUser', 'errorPage'];
@@ -38,32 +31,6 @@ module.exports = function (appInfo) {
     config.site_static_host = process.env.EGG_SITE_STATIC_HOST || ''; // 静态文件存储域名
 
     config.mini_assets = process.env.EGG_MINI_ASSETS || false;
-
-    // 版块
-    config.tabs = [['share', '分享'], ['ask', '问答'], ['job', '招聘']];
-
-    // RSS配置
-    config.rss = {
-        'title': 'CNode：Node.js专业中文社区',
-        'link': 'http://cnodejs.org',
-        'language': 'zh-cn',
-        'description': 'CNode：Node.js专业中文社区',
-        // 最多获取的RSS Item数量
-        'max_rss_items': 50
-    };
-
-    // 下面两个配置都是文件上传的配置
-
-    // 7牛的access信息，用于文件上传
-    config.qn_access = {
-        'accessKey': 'your access key',
-        'secretKey': 'your secret key',
-        'bucket': 'your bucket name',
-        'origin': 'http://your qiniu domain',
-        // 如果vps在国外，请使用 http://up.qiniug.com/ ，这是七牛的国际节点
-        // 如果在国内，此项请留空
-        'uploadURL': 'http://xxxxxxxx'
-    };
 
     // 文件上传配置
     // 注：如果填写 qn_access，则会上传到 7牛，以下配置无效
@@ -83,15 +50,19 @@ module.exports = function (appInfo) {
         'layout': 'layout.html'
     };
 
-    config.avatars_allow_hostname = ['avatars0.githubusercontent.com', 'avatars1.githubusercontent.com', 'avatars2.githubusercontent.com', 'avatars.githubusercontent.com', 'www.gravatar.com', 'gravatar.com', 'www.google-analytics.com'];
-
-    config.auth_cookie_name = 'node_club';
+    config.auth_cookie_name = 'bee_route';
     config.admins = {
         'ADMIN_USER': true
     };
 
     config.siteFile = {
         '/favicon.ico': '/public/images/cnode_icon_32.png'
+    };
+
+    config.static = {
+        prefix: '/',
+        maxAge: 31536000,
+        dir: [path.join(appInfo.baseDir, 'public/')]
     };
 
     // database
@@ -127,13 +98,19 @@ module.exports = function (appInfo) {
 
     // 邮箱配置
     config.mail_opts = {
-        'host': 'smtp.126.com',
+        'host': 'smtp.sendgrid.net',
         'port': 25,
         'auth': {
-            'user': 'club@126.com',
-            'pass': 'club'
+            'user': 'koinotice@gmail.com',
+            'pass': 'T861pW7vp_qp7w.izWe4Eh4Hqoa4Y9fVG'
         },
         'ignoreTLS': true
+    };
+    config.mail_grid_opts = {
+        auth: {
+            api_user: 'apikey',
+            api_key: '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'
+        }
     };
 
     config.alinode = {
@@ -154,12 +131,17 @@ module.exports = function (appInfo) {
     config.search = 'google'; // 'google', 'baidu', 'local'
 
 
+    config.security = {
+        csrf: {
+            enable: false
+        }
+    };
     // config/config.${env}.js
     config.mysql = {
         // 单数据库信息配置
         'client': {
             // host
-            'host': 'mysql.com',
+            'host': 'localhost',
             // 端口号
             'port': '3306',
             // 用户名
@@ -173,6 +155,13 @@ module.exports = function (appInfo) {
         'app': true,
         // 是否加载到 agent 上，默认关闭
         'agent': false
+    };
+
+    config.jwt = {
+        secret: 'DwNgD85L2Rc9',
+        option: {
+            expiresIn: '360d'
+        }
     };
 
     return config;

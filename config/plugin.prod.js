@@ -1,6 +1,5 @@
-'use strict';
 
 exports.alinode = {
-  enable: true,
-  package: 'egg-alinode',
+    enable: true,
+    package: 'egg-alinode'
 };

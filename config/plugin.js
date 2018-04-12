@@ -1,51 +1,62 @@
 /* eslint-disable quotes */
-'use strict';
-
 // had enabled by egg
 // exports.static = true;
 
+exports.static = true;
+exports.security = {
+    csrf: {
+        enable: false
+    }
+};
+
+
+
 exports.ejs = {
     'enable': true,
-    'package': 'egg-view-ejs',
+    'package': 'egg-view-ejs'
 };
 
 exports.redis = {
     'enable': true,
-    'package': 'egg-redis',
+    'package': 'egg-redis'
 };
 
 exports.mongoose = {
     'enable': true,
-    'package': 'egg-mongoose',
+    'package': 'egg-mongoose'
 };
 
 exports.passport = {
     'enable': true,
-    'package': 'egg-passport',
+    'package': 'egg-passport'
 };
 
 exports.passportGithub = {
     'enable': true,
-    'package': 'egg-passport-github',
+    'package': 'egg-passport-github'
 };
 
 exports.passportLocal = {
     'enable': true,
-    'package': 'egg-passport-local',
+    'package': 'egg-passport-local'
 };
 
 exports.alinode = {
     'enable': true,
     'package': 'egg-alinode',
-    "env": [ "prod" ],
+    "env": ["prod"]
 };
 
 exports.validate = {
     'enable': true,
-    'package': 'egg-validate',
+    'package': 'egg-validate'
 };
 
 exports.mysql = {
     'enable': true,
-    'package': 'egg-mysql',
+    'package': 'egg-mysql'
+};
+exports.jwt = {
+    enable: true,
+    package: "egg-jwt"
 };

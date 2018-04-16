@@ -237,4 +237,4 @@ var UserService = function (_Service) {
 }(Service);
 
 module.exports = UserService;
-//# sourceMappingURL=user.js.map
+//# sourceMappingURL=user1.js.map

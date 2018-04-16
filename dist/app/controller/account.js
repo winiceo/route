@@ -72,14 +72,12 @@ module.exports = function (app) {
 
                                 case 13:
                                     _context.next = 15;
-                                    return service.account.getUsersByQuery({
-                                        $or: [{ email: email }]
-                                    }, {});
+                                    return service.account.getUserByMail(email);
 
                                 case 15:
                                     accounts = _context.sent;
 
-                                    if (!(accounts.length > 0)) {
+                                    if (!accounts) {
                                         _context.next = 21;
                                         break;
                                     }
@@ -156,7 +154,7 @@ module.exports = function (app) {
 
                                     getUser = function getUser(email) {
                                         if (email.indexOf('@') > 0) {
-                                            return ctx.service.user.getUserByMail(email);
+                                            return ctx.service.account.getUserByMail(email);
                                         }
                                         return false;
                                     };
@@ -178,7 +176,7 @@ module.exports = function (app) {
                                     return _context2.abrupt('return');
 
                                 case 16:
-                                    passhash = existUser.pass;
+                                    passhash = existUser.password;
                                     // TODO: change to async compare
 
                                     equal = ctx.helper.bcompare(password, passhash);
@@ -195,7 +193,7 @@ module.exports = function (app) {
                                     return _context2.abrupt('return');
 
                                 case 23:
-                                    token = app.jwt.sign({ email: existUser.email }, app.config.jwt.secret);
+                                    token = app.jwt.sign({ email: existUser.email, user_id: existUser.id }, app.config.jwt.secret);
 
 
                                     ret.status = 200;

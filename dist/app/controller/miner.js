@@ -29,29 +29,29 @@ module.exports = function (app) {
             key: 'index',
             value: function () {
                 var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                    var ctx, service, config, ret;
+                    var ctx, service, config, ret, uid, assets;
                     return regeneratorRuntime.wrap(function _callee$(_context) {
                         while (1) {
                             switch (_context.prev = _context.next) {
                                 case 0:
                                     ctx = this.ctx, service = this.service, config = this.config;
                                     ret = {
-                                        status: 422,
+                                        status: 200,
                                         message: '',
                                         data: {}
                                     };
-
-
-                                    ret.status = 200;
-
-                                    ret.data = {
-                                        can_use_balance: 5.5,
-                                        total_balance: 15.5
-
-                                    };
-                                    ctx.body = ret;
+                                    uid = ctx.account.user_id;
+                                    _context.next = 5;
+                                    return service.miner.getByUserId(uid);
 
                                 case 5:
+                                    assets = _context.sent;
+
+
+                                    ret.data = assets;
+                                    ctx.body = ret;
+
+                                case 8:
                                 case 'end':
                                     return _context.stop();
                             }
@@ -69,29 +69,35 @@ module.exports = function (app) {
             key: 'detail',
             value: function () {
                 var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                    var ctx, service, config, ret;
+                    var ctx, service, config, miner_id, params, page, limit, offset, ret, miner_shares;
                     return regeneratorRuntime.wrap(function _callee2$(_context2) {
                         while (1) {
                             switch (_context2.prev = _context2.next) {
                                 case 0:
                                     ctx = this.ctx, service = this.service, config = this.config;
+                                    miner_id = ctx.params.miner_id;
+                                    params = ctx.request.query;
+                                    page = parseInt(params.page) || 1;
+                                    limit = 20;
+                                    offset = (page - 1) * limit;
                                     ret = {
                                         status: 422,
                                         message: '',
                                         data: {}
                                     };
+                                    _context2.next = 9;
+                                    return service.miner.getSharesByMinerId({ miner_id: miner_id, offset: offset, limit: limit });
+
+                                case 9:
+                                    miner_shares = _context2.sent;
 
 
                                     ret.status = 200;
 
-                                    ret.data = {
-                                        can_use_balance: 5.5,
-                                        total_balance: 15.5
-
-                                    };
+                                    ret.data = miner_shares;
                                     ctx.body = ret;
 
-                                case 5:
+                                case 13:
                                 case 'end':
                                     return _context2.stop();
                             }
@@ -104,46 +110,6 @@ module.exports = function (app) {
                 }
 
                 return detail;
-            }()
-        }, {
-            key: 'withdrawHistory',
-            value: function () {
-                var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-                    var ctx, service, config, ret;
-                    return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                        while (1) {
-                            switch (_context3.prev = _context3.next) {
-                                case 0:
-                                    ctx = this.ctx, service = this.service, config = this.config;
-                                    ret = {
-                                        status: 422,
-                                        message: '',
-                                        data: {}
-                                    };
-
-
-                                    ret.status = 200;
-
-                                    ret.data = {
-                                        can_use_balance: 5.5,
-                                        total_balance: 15.5
-
-                                    };
-                                    ctx.body = ret;
-
-                                case 5:
-                                case 'end':
-                                    return _context3.stop();
-                            }
-                        }
-                    }, _callee3, this);
-                }));
-
-                function withdrawHistory() {
-                    return _ref3.apply(this, arguments);
-                }
-
-                return withdrawHistory;
             }()
         }]);
 

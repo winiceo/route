@@ -130,7 +130,6 @@ module.exports = function (appInfo) {
 
     config.search = 'google'; // 'google', 'baidu', 'local'
 
-
     config.security = {
         csrf: {
             enable: false

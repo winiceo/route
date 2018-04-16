@@ -736,4 +736,4 @@ var UserController = function (_Controller) {
 }(Controller);
 
 module.exports = UserController;
-//# sourceMappingURL=user.js.map
+//# sourceMappingURL=user1.js.map

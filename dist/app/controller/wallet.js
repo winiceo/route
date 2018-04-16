@@ -29,29 +29,32 @@ module.exports = function (app) {
             key: 'assets',
             value: function () {
                 var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                    var ctx, service, config, ret;
+                    var ctx, service, config, ret, uid, assets;
                     return regeneratorRuntime.wrap(function _callee$(_context) {
                         while (1) {
                             switch (_context.prev = _context.next) {
                                 case 0:
                                     ctx = this.ctx, service = this.service, config = this.config;
                                     ret = {
-                                        status: 422,
+                                        status: 200,
                                         message: '',
                                         data: {}
                                     };
 
 
                                     ret.status = 200;
+                                    uid = ctx.account.user_id;
+                                    _context.next = 6;
+                                    return service.asset.getByUserId(uid);
 
-                                    ret.data = {
-                                        can_use_balance: 5.5,
-                                        total_balance: 15.5
+                                case 6:
+                                    assets = _context.sent;
 
-                                    };
+
+                                    ret.data = assets;
                                     ctx.body = ret;
 
-                                case 5:
+                                case 9:
                                 case 'end':
                                     return _context.stop();
                             }
@@ -69,29 +72,39 @@ module.exports = function (app) {
             key: 'withdraw',
             value: function () {
                 var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                    var ctx, service, config, ret;
+                    var ctx, service, config, coin_type, address, amount, captcha, user_id, ret, withdraw;
                     return regeneratorRuntime.wrap(function _callee2$(_context2) {
                         while (1) {
                             switch (_context2.prev = _context2.next) {
                                 case 0:
                                     ctx = this.ctx, service = this.service, config = this.config;
+                                    coin_type = validator.trim(ctx.request.body.coin_type || '').toLowerCase();
+                                    address = validator.trim(ctx.request.body.address || '');
+                                    amount = validator.trim(String(ctx.request.body.amount) || '');
+                                    captcha = validator.trim(String(ctx.request.body.captcha) || '');
+                                    user_id = ctx.account.user_id;
+
+                                    console.log(ctx.account);
                                     ret = {
-                                        status: 422,
+                                        status: 200,
                                         message: '',
                                         data: {}
                                     };
+                                    _context2.next = 10;
+                                    return service.withdraw.newAndSave({
+                                        user_id: user_id,
+                                        coin_type: coin_type,
+                                        address: address,
+                                        amount: amount
+                                    });
+
+                                case 10:
+                                    withdraw = _context2.sent;
 
 
-                                    ret.status = 200;
-
-                                    ret.data = {
-                                        can_use_balance: 5.5,
-                                        total_balance: 15.5
-
-                                    };
                                     ctx.body = ret;
 
-                                case 5:
+                                case 12:
                                 case 'end':
                                     return _context2.stop();
                             }
@@ -109,29 +122,31 @@ module.exports = function (app) {
             key: 'withdrawHistory',
             value: function () {
                 var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-                    var ctx, service, config, ret;
+                    var ctx, service, config, ret, user_id, withdrawList;
                     return regeneratorRuntime.wrap(function _callee3$(_context3) {
                         while (1) {
                             switch (_context3.prev = _context3.next) {
                                 case 0:
                                     ctx = this.ctx, service = this.service, config = this.config;
                                     ret = {
-                                        status: 422,
+                                        status: 200,
                                         message: '',
                                         data: {}
                                     };
+                                    user_id = ctx.account.user_id;
+                                    _context3.next = 5;
+                                    return service.withdraw.findAll({
+                                        user_id: user_id
 
-
-                                    ret.status = 200;
-
-                                    ret.data = {
-                                        can_use_balance: 5.5,
-                                        total_balance: 15.5
-
-                                    };
-                                    ctx.body = ret;
+                                    });
 
                                 case 5:
+                                    withdrawList = _context3.sent;
+
+                                    ret.data = withdrawList;
+                                    ctx.body = ret;
+
+                                case 8:
                                 case 'end':
                                     return _context3.stop();
                             }

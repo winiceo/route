@@ -43,13 +43,10 @@ module.exports = app => {
             // todo 验证码校验
 
 
-            const accounts = await service.account.getUsersByQuery({
-                $or: [
-                    { email }
-                ]
-            }, {});
+            const accounts = await service.account.getUserByMail(email);
 
-            if (accounts.length > 0) {
+
+            if (accounts) {
                 ctx.status = 422;
                 ret.message = '用户名或邮箱已被使用。';
                 ctx.body = ret;
@@ -97,7 +94,7 @@ module.exports = app => {
 
             const getUser = email => {
                 if (email.indexOf('@') > 0) {
-                    return ctx.service.user.getUserByMail(email);
+                    return ctx.service.account.getUserByMail(email);
                 }
                 return false;
             };
@@ -111,7 +108,7 @@ module.exports = app => {
                 return;
             }
 
-            const passhash = existUser.pass;
+            const passhash = existUser.password;
             // TODO: change to async compare
             const equal = ctx.helper.bcompare(password, passhash);
             // 密码不匹配
@@ -122,7 +119,7 @@ module.exports = app => {
                 return;
             }
 
-            const token = app.jwt.sign({ email: existUser.email }, app.config.jwt.secret);
+            const token = app.jwt.sign({ email: existUser.email, user_id: existUser.id }, app.config.jwt.secret);
 
 
             ret.status = 200;

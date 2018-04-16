@@ -133,8 +133,6 @@ module.exports = appInfo => {
 
     config.search = 'google'; // 'google', 'baidu', 'local'
 
-
-
     config.security = {
         csrf: {
             enable: false
@@ -160,6 +158,8 @@ module.exports = appInfo => {
         // 是否加载到 agent 上，默认关闭
         'agent': false
     };
+
+
 
     config.jwt = {
         secret: 'DwNgD85L2Rc9',

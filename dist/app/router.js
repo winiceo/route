@@ -38,7 +38,7 @@ module.exports = function (app) {
    * miner相关
    */
   router.post('/miner', tokenCheck, miner.index);
-  router.post('/miner/:id', tokenCheck, miner.detail);
+  router.post('/miner/:miner_id', tokenCheck, miner.detail);
 
   /**
    * 邮箱相关

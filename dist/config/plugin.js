@@ -21,26 +21,6 @@ exports.redis = {
     'package': 'egg-redis'
 };
 
-exports.mongoose = {
-    'enable': true,
-    'package': 'egg-mongoose'
-};
-
-exports.passport = {
-    'enable': true,
-    'package': 'egg-passport'
-};
-
-exports.passportGithub = {
-    'enable': true,
-    'package': 'egg-passport-github'
-};
-
-exports.passportLocal = {
-    'enable': true,
-    'package': 'egg-passport-local'
-};
-
 exports.alinode = {
     'enable': true,
     'package': 'egg-alinode',
@@ -55,6 +35,11 @@ exports.validate = {
 exports.mysql = {
     'enable': true,
     'package': 'egg-mysql'
+};
+
+exports.sequelize = {
+    enable: false,
+    package: 'egg-sequelize'
 };
 exports.jwt = {
     enable: true,

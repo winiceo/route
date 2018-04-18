@@ -108,6 +108,11 @@ module.exports = appInfo => {
         }
     };
 
+    config.logger = {
+        dir: '/pmkoo/logs'
+    };
+
+
     config.alinode = {
         // 从 `Node.js 性能平台` 获取对应的接入参数
         'appid': process.env.EGG_ALINODE_APPID || '13173',

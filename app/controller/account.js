@@ -155,7 +155,7 @@ module.exports = app => {
                 return;
             }
 
-            const user = await service.user.getUserByMail(email);
+            const user = await service.account.getUserByMail(email);
             if (!user) {
                 ret.message = '邮箱不存在';
                 ctx.body = ret;

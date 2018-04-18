@@ -1,8 +1,10 @@
 # BeeRoute api使用说明
 
-测试环境域名(apiurl): http://route.71an.com/api/v1
 
->api请求路径 如：Post {{apiurl}}/order/detail/{id}
+
+测试环境域名(apiurl): https://route.71an.com/api
+
+> api请求路径 如：Post {{apiurl}}/order/detail/{id}
 替换路径中的变量:id为请求参数
 
 

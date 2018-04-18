@@ -6,6 +6,7 @@
   "dependencies": {
     "@sendgrid/mail": "^6.2.1",
     "await-stream-ready": "^1.0.1",
+    "axios": "^0.18.0",
     "baidu-aip-sdk": "^2.1.0",
     "bcryptjs": "^2.4.3",
     "data2xml": "^1.2.5",

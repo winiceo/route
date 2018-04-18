@@ -20,11 +20,6 @@ module.exports = function (app) {
 
   var tokenCheck = middleware.tokenCheck();
 
-  router.redirect('/', '/docs', 302);
-
-  router.get('/docs', home.docs); // 用户登录
-
-
   /**
    * 用户相关
    */

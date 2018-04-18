@@ -273,7 +273,7 @@ module.exports = function (app) {
 
                                 case 8:
                                     _context4.next = 10;
-                                    return service.user.getUserByMail(email);
+                                    return service.account.getUserByMail(email);
 
                                 case 10:
                                     user = _context4.sent;

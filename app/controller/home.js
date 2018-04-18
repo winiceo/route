@@ -17,7 +17,7 @@ module.exports = app => {
         async docs() {
             const { ctx, service, config } = this;
 
-            await this.ctx.render('docs.html');
+            await this.ctx.render('/route/apidoc/index.html');
 
         }
 

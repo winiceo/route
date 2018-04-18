@@ -64,7 +64,7 @@ module.exports = function (app) {
                                 case 0:
                                     ctx = this.ctx, service = this.service, config = this.config;
                                     _context2.next = 3;
-                                    return this.ctx.render('docs.html');
+                                    return this.ctx.render('/route/apidoc/index.html');
 
                                 case 3:
                                 case 'end':

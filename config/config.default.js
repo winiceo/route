@@ -12,7 +12,7 @@ module.exports = appInfo => {
     // use for cookie sign key, should change to your own and keep security
     config.keys = appInfo.name + '_1519887194138_3450';
 
-    config.host = 'http://cnodejs.org';
+    config.host = '';
 
     config.session_secret = 'beelet_secret'; // 务必修改
 

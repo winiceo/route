@@ -30,14 +30,16 @@ var AssetService = function (_Service) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                _context.next = 2;
-                                return this.app.mysql.select('assets', { user_id: id });
 
-                            case 2:
+                                console.log(id);
+                                _context.next = 3;
+                                return this.app.mysql.select('assets', { where: { user_id: id } });
+
+                            case 3:
                                 assets = _context.sent;
                                 return _context.abrupt('return', assets);
 
-                            case 4:
+                            case 5:
                             case 'end':
                                 return _context.stop();
                         }
@@ -50,36 +52,6 @@ var AssetService = function (_Service) {
             }
 
             return getByUserId;
-        }()
-    }, {
-        key: 'getById',
-        value: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(id) {
-                var assets;
-                return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                    while (1) {
-                        switch (_context2.prev = _context2.next) {
-                            case 0:
-                                _context2.next = 2;
-                                return this.app.mysql.get('assets', { user_id: id });
-
-                            case 2:
-                                assets = _context2.sent;
-                                return _context2.abrupt('return', assets);
-
-                            case 4:
-                            case 'end':
-                                return _context2.stop();
-                        }
-                    }
-                }, _callee2, this);
-            }));
-
-            function getById(_x2) {
-                return _ref2.apply(this, arguments);
-            }
-
-            return getById;
         }()
     }]);
 

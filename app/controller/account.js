@@ -60,7 +60,7 @@ module.exports = app => {
 
             console.log(result);
             // 发送激活邮件
-            await service.mail.sendActiveMail(email, utility.md5(email + passhash + config.session_secret));
+           // await service.mail.sendActiveMail(email, utility.md5(email + passhash + config.session_secret));
             ret.status = 200;
             ctx.body = ret;
         }
@@ -164,8 +164,9 @@ module.exports = app => {
             }
 
             const passhash = ctx.helper.bhash(password);
-            user.pass = passhash;
-            await user.save();
+            user.password = passhash;
+            const rs = await service.account.updateUser(user);
+            console.log(rs)
             ctx.status = 200;
             ret.status = 200;
             ctx.body = ret;
@@ -190,7 +191,8 @@ module.exports = app => {
                 return;
 
             }
-            const equal = ctx.helper.bcompare(old_password, user.pass);
+
+            const equal = ctx.helper.bcompare(old_password, user.password);
             // 密码不匹配
             if (!equal) {
                 ctx.status = 422;
@@ -200,9 +202,9 @@ module.exports = app => {
             }
 
             const passhash = ctx.helper.bhash(password);
-            user.pass = passhash;
-
-            await user.save();
+            user.password = passhash;
+            const rs = await service.account.updateUser(user);
+            console.log(rs);
             ctx.status = 200;
             ret.status = 200;
             ctx.body = ret;

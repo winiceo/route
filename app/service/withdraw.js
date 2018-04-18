@@ -19,7 +19,7 @@ class AssetService extends Service {
 
 
         const ret = await this.app.mysql.select('withdraw',
-            {where:query}
+            { where: query }
 
         );
 

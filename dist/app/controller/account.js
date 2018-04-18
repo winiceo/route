@@ -98,14 +98,11 @@ module.exports = function (app) {
 
                                     console.log(result);
                                     // 发送激活邮件
-                                    _context.next = 28;
-                                    return service.mail.sendActiveMail(email, utility.md5(email + passhash + config.session_secret));
-
-                                case 28:
+                                    // await service.mail.sendActiveMail(email, utility.md5(email + passhash + config.session_secret));
                                     ret.status = 200;
                                     ctx.body = ret;
 
-                                case 30:
+                                case 28:
                                 case 'end':
                                     return _context.stop();
                             }
@@ -248,7 +245,7 @@ module.exports = function (app) {
             key: 'forget',
             value: function () {
                 var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-                    var ctx, service, ret, email, password, user, passhash;
+                    var ctx, service, ret, email, password, user, passhash, rs;
                     return regeneratorRuntime.wrap(function _callee4$(_context4) {
                         while (1) {
                             switch (_context4.prev = _context4.next) {
@@ -290,16 +287,19 @@ module.exports = function (app) {
                                 case 15:
                                     passhash = ctx.helper.bhash(password);
 
-                                    user.pass = passhash;
+                                    user.password = passhash;
                                     _context4.next = 19;
-                                    return user.save();
+                                    return service.account.updateUser(user);
 
                                 case 19:
+                                    rs = _context4.sent;
+
+                                    console.log(rs);
                                     ctx.status = 200;
                                     ret.status = 200;
                                     ctx.body = ret;
 
-                                case 22:
+                                case 24:
                                 case 'end':
                                     return _context4.stop();
                             }
@@ -319,7 +319,7 @@ module.exports = function (app) {
             key: 'updatePass',
             value: function () {
                 var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-                    var ctx, service, ret, old_password, password, user, equal, passhash;
+                    var ctx, service, ret, old_password, password, user, equal, passhash, rs;
                     return regeneratorRuntime.wrap(function _callee5$(_context5) {
                         while (1) {
                             switch (_context5.prev = _context5.next) {
@@ -348,7 +348,7 @@ module.exports = function (app) {
                                     return _context5.abrupt('return');
 
                                 case 11:
-                                    equal = ctx.helper.bcompare(old_password, user.pass);
+                                    equal = ctx.helper.bcompare(old_password, user.password);
                                     // 密码不匹配
 
                                     if (equal) {
@@ -364,17 +364,19 @@ module.exports = function (app) {
                                 case 17:
                                     passhash = ctx.helper.bhash(password);
 
-                                    user.pass = passhash;
-
+                                    user.password = passhash;
                                     _context5.next = 21;
-                                    return user.save();
+                                    return service.account.updateUser(user);
 
                                 case 21:
+                                    rs = _context5.sent;
+
+                                    console.log(rs);
                                     ctx.status = 200;
                                     ret.status = 200;
                                     ctx.body = ret;
 
-                                case 24:
+                                case 26:
                                 case 'end':
                                     return _context5.stop();
                             }

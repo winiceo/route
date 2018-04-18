@@ -25,6 +25,16 @@ class AccountService extends Service {
         return ret;
     }
 
+    async updateUser(data) {
+
+        console.log(data);
+
+        const ret = await this.app.mysql.update('users', data, { where: { id: data.id }});
+
+
+        return ret;
+    }
+
 
 }
 

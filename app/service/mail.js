@@ -1,11 +1,26 @@
 
 const Service = require('egg').Service;
-const mailer = require('nodemailer');
+//const mailer = require('nodemailer');
 // const smtpTransport = require('nodemailer-smtp-transport');
 // const sgTransport = require('nodemailer-sendgrid-transport');
 const sgMail = require('@sendgrid/mail');
 
 class MailService extends Service {
+
+    async saveCaptcha(email, rd) {
+        const results = await this.app.mysql.query('replace into captcha set email =? ,rd = ?', [email, rd]);
+
+        return results;
+
+    }
+
+    async getCaptcha(email) {
+        const results = await this.app.mysql.get('captcha', { email: email });
+        return results;
+
+    }
+
+
     async sendMail(data) {
         const { config, logger } = this;
 
@@ -35,14 +50,14 @@ class MailService extends Service {
         const name = 'miner';
         const from = `${config.name} <${config.mail_opts.auth.user}>`;
         const to = who;
-        const subject = config.name + '社区帐号激活';
-        const html = String('<p>您好：' + name + '</p>' +
-    '<p>我们收到您在' + config.name + '社区的注册信息，请点击下面的链接来激活帐户：</p>' +
+        const subject = config.name + '邮箱验证';
+        const html = String('<p>您好：</p>' +
+    '<p>您的邮箱验证码为：</p>' +
     '验证码:' + token) +
-    '<p>若您没有在' + config.name + '社区填写过注册信息，说明有人滥用了您的电子邮箱，请删除此邮件，我们对给您造成的打扰感到抱歉。</p>' +
+    '<p>若您没有在' + config.name + '填写过注册信息，说明有人滥用了您的电子邮箱，请删除此邮件，我们对给您造成的打扰感到抱歉。</p>' +
     '<p>' + config.name + '社区 谨上。</p>';
 
-        console.log(html);
+        await this.saveCaptcha(who, token);
         await this.sendMail({
             from,
             to,
@@ -62,7 +77,7 @@ class MailService extends Service {
     '<a href="' + config.host + '/reset_pass?key=' + token + '&name=' + name + '">重置密码链接</a>' +
     '<p>若您没有在' + config.name + '社区填写过注册信息，说明有人滥用了您的电子邮箱，请删除此邮件，我们对给您造成的打扰感到抱歉。</p>' +
     '<p>' + config.name + '社区 谨上。</p>';
-
+        this.saveCaptcha(to, token);
         await this.sendMail({
             from,
             to,

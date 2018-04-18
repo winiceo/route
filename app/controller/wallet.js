@@ -18,7 +18,10 @@ module.exports = app => {
 
 
             ret.status = 200;
+
             const uid = ctx.account.user_id;
+
+
 
             const assets = await service.asset.getByUserId(uid);
 

@@ -88,6 +88,39 @@ var AccountService = function (_Service) {
 
             return newAndSave;
         }()
+    }, {
+        key: 'updateUser',
+        value: function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(data) {
+                var ret;
+                return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+
+                                console.log(data);
+
+                                _context3.next = 3;
+                                return this.app.mysql.update('users', data, { where: { id: data.id } });
+
+                            case 3:
+                                ret = _context3.sent;
+                                return _context3.abrupt('return', ret);
+
+                            case 5:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this);
+            }));
+
+            function updateUser(_x4) {
+                return _ref3.apply(this, arguments);
+            }
+
+            return updateUser;
+        }()
     }]);
 
     return AccountService;

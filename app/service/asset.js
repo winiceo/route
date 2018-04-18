@@ -7,16 +7,10 @@ class AssetService extends Service {
 
     async getByUserId(id) {
 
-        const assets = await this.app.mysql.select('assets', { user_id: id });
+        console.log(id);
+        const assets = await this.app.mysql.select('assets', { where: { user_id: id }});
         return assets;
     }
-
-    async getById(id) {
-
-        const assets = await this.app.mysql.get('assets', { user_id: id });
-        return assets;
-    }
-
 
 }
 

@@ -16,7 +16,6 @@ module.exports = app => {
                 data: {}
             };
 
-
             ret.status = 200;
 
             ret.data = {

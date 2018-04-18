@@ -104,7 +104,7 @@ module.exports = appInfo => {
     config.mail_grid_opts = {
         auth: {
             api_user: 'apikey',
-            api_key: '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'
+            api_key: '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'
         }
     };
 
@@ -175,12 +175,12 @@ module.exports = appInfo => {
         all(err, ctx) {
             // 在此处定义针对所有响应类型的错误处理方法
             // 注意，定义了 config.all 之后，其他错误处理方法不会再生效
-            ctx.body = 'error3';
+            ctx.body = { status: 500, message: 'error' };
             ctx.status = 500;
         },
         html(err, ctx) {
             // html hander
-            ctx.body = '<h3>error3</h3>';
+            ctx.body = { status: 500, message: 'error' };
             ctx.status = 500;
         },
         json(err, ctx) {

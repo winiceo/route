@@ -43,6 +43,7 @@ module.exports = function (app) {
 
 
                                     ret.status = 200;
+
                                     uid = ctx.account.user_id;
                                     _context.next = 6;
                                     return service.asset.getByUserId(uid);

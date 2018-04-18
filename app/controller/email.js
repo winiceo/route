@@ -26,6 +26,7 @@ module.exports = app => {
                 ctx.body = ret;
                 return;
             }
+
             const rd = ctx.helper.getRandomIntInclusive(999999, 100000);
 
             // 发送激活邮件

@@ -26,7 +26,7 @@ module.exports = function (app) {
         }
 
         _createClass(HomeController, [{
-            key: 'docs',
+            key: 'index',
             value: function () {
                 var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
                     var ctx, service, config;
@@ -35,10 +35,11 @@ module.exports = function (app) {
                             switch (_context.prev = _context.next) {
                                 case 0:
                                     ctx = this.ctx, service = this.service, config = this.config;
-                                    _context.next = 3;
-                                    return this.ctx.render('docs.html');
 
-                                case 3:
+
+                                    app.router.redirect('/', '/home/index', 302);
+
+                                case 2:
                                 case 'end':
                                     return _context.stop();
                             }
@@ -46,8 +47,35 @@ module.exports = function (app) {
                     }, _callee, this);
                 }));
 
-                function docs() {
+                function index() {
                     return _ref.apply(this, arguments);
+                }
+
+                return index;
+            }()
+        }, {
+            key: 'docs',
+            value: function () {
+                var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                    var ctx, service, config;
+                    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                        while (1) {
+                            switch (_context2.prev = _context2.next) {
+                                case 0:
+                                    ctx = this.ctx, service = this.service, config = this.config;
+                                    _context2.next = 3;
+                                    return this.ctx.render('docs.html');
+
+                                case 3:
+                                case 'end':
+                                    return _context2.stop();
+                            }
+                        }
+                    }, _callee2, this);
+                }));
+
+                function docs() {
+                    return _ref2.apply(this, arguments);
                 }
 
                 return docs;

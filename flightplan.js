@@ -108,15 +108,12 @@ let deploy = {
         // transport.exec(`pm2 delete ${application}`);
         // transport.exec(`pm2 startOrRestart ${join(currentPath)}/ecosystem.json5 --env production`);
 
-        transport.exec(' npm stop');
 
-        transport.exec(' npm start');
+        transport.with(`cd ${join(currentPath)}`, { silent: true }, function() {
+            transport.exec('npm stop');
 
-        // transport.with(`cd ${join(currentPath)}`, {silent: true}, function() {
-        //     transport.ls('-al'); // 'cd /tmp && ls -al', output suppressed
-        //     transport.exec(`pm2 startOrRestart ${join(currentPath)}/ecosystem.json5 --env production`);
-        //
-        // });
+            transport.exec('npm start');
+        });
 
         transport.exec('pwd');
         // transport.exec(`pm2 desc ${application}`);

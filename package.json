@@ -23,6 +23,8 @@
     "egg-static": "^2.1.0",
     "egg-validate": "^1.0.0",
     "egg-view-ejs": "^2.0.0",
+    "egg-view-nunjucks": "^2.2.0",
+    "flightplan": "^0.6.17",
     "image-downloader": "^3.3.0",
     "jsencrypt": "^3.0.0-beta.1",
     "loader": "^2.1.1",
@@ -84,7 +86,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git@github.com:winiceo/route.git"
   },
   "author": "",
   "license": "MIT"

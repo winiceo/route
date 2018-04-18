@@ -2,7 +2,7 @@
 const join                = require('path').join;
 const plan                = require('flightplan');
 const pkg = require('./package.json');
-const config = require('../config.js');
+const config = require('./deploy.config.js');
 const application       = pkg.name;
 const deployTo          = join(config.prodPath, application);
 const repoUrl           = pkg.repository.url;
@@ -106,7 +106,8 @@ let deploy = {
         transport.log('Booting application...');
         transport.exec('EGG_SERVER_ENV=prod');
         // transport.exec(`pm2 delete ${application}`);
-        transport.exec(`pm2 startOrRestart ${join(currentPath)}/ecosystem.json5 --env production`);
+        //transport.exec(`pm2 startOrRestart ${join(currentPath)}/ecosystem.json5 --env production`);
+        transport.exec(` npm start`);
 
         // transport.with(`cd ${join(currentPath)}`, {silent: true}, function() {
         //     transport.ls('-al'); // 'cd /tmp && ls -al', output suppressed
@@ -115,7 +116,7 @@ let deploy = {
         // });
 
         transport.exec('pwd');
-        transport.exec(`pm2 desc ${application}`);
+        //transport.exec(`pm2 desc ${application}`);
 
         // transport.exec(`NODE_ENV=production forever restart -c nodejs --spinSleepTime 10000 ${join(currentPath, 'index.js')} || NODE_ENV=production forever start -c nodejs --spinSleepTime 10000 ${join(currentPath, 'index.js')}`, { silent: true })
 

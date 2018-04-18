@@ -7,7 +7,6 @@ var status = [404, 403];
 module.exports = function () {
     return function () {
         var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(ctx, next) {
-            var message;
             return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
                     switch (_context.prev = _context.next) {
@@ -16,29 +15,14 @@ module.exports = function () {
                             return next();
 
                         case 2:
-                            if (!(status.indexOf(ctx.status) > -1 && !ctx.body)) {
-                                _context.next = 11;
-                                break;
+                            if (status.indexOf(ctx.status) > -1 && !ctx.body) {
+
+                                ctx.status = ctx.status;
+
+                                ctx.body = { status: 500, message: 'Not Found' };
                             }
 
-                            message = ctx.message;
-
-                            ctx.status = ctx.status;
-
-                            if (!ctx.acceptJSON) {
-                                _context.next = 9;
-                                break;
-                            }
-
-                            ctx.body = { error: 'Not Found' };
-                            _context.next = 11;
-                            break;
-
-                        case 9:
-                            _context.next = 11;
-                            return ctx.render('notify/notify', { error: message });
-
-                        case 11:
+                        case 3:
                         case 'end':
                             return _context.stop();
                     }

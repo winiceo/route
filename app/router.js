@@ -6,11 +6,13 @@ module.exports = app => {
     const { router, controller, middleware } = app;
 
     const {
-        account, balance, wallet, miner, email, test
+        account, balance, wallet, miner, email, test,home
     } = controller;
 
     const tokenCheck = middleware.tokenCheck();
 
+    router.get('/docs', home.docs);// 用户登录
+    router.get('/', home.docs);// 用户登录
 
     /**
      * 用户相关

@@ -3,6 +3,7 @@
 var path = require('path');
 
 module.exports = function (appInfo) {
+
     var config = {};
 
     config.name = 'BeeRoute Api';
@@ -17,7 +18,7 @@ module.exports = function (appInfo) {
     config.session_secret = 'beelet_secret'; // 务必修改
 
     // add your config here
-    config.middleware = ['locals', 'authUser', 'blockUser', 'errorPage'];
+    config.middleware = ['errorPage'];
 
     config.authUser = {
         'enable': true,
@@ -39,17 +40,6 @@ module.exports = function (appInfo) {
         'url': '/public/upload/'
     };
 
-    config.view = {
-        'defaultViewEngine': 'ejs',
-        'mapping': {
-            '.html': 'ejs'
-        }
-    };
-
-    config.ejs = {
-        'layout': 'layout.html'
-    };
-
     config.auth_cookie_name = 'bee_route';
     config.admins = {
         'ADMIN_USER': true
@@ -60,9 +50,11 @@ module.exports = function (appInfo) {
     };
 
     config.static = {
-        prefix: '/',
+        prefix: '/docs',
+        dynamic: true,
+        preload: false,
         maxAge: 31536000,
-        dir: [path.join(appInfo.baseDir, 'public/')]
+        dir: path.join(appInfo.baseDir, 'public/')
     };
 
     // database
@@ -160,6 +152,39 @@ module.exports = function (appInfo) {
         secret: 'DwNgD85L2Rc9',
         option: {
             expiresIn: '360d'
+        }
+    };
+    config.view = {
+        root: path.join(appInfo.baseDir, 'app/view'),
+        ext: 'html',
+        cache: true,
+        defaultExt: '.html',
+        mapping: {
+            '.ejs': 'ejs',
+            '.nj': 'nunjucks',
+            '.html': 'nunjucks'
+        }
+    };
+
+    config.onerror = {
+        all: function all(err, ctx) {
+            // 在此处定义针对所有响应类型的错误处理方法
+            // 注意，定义了 config.all 之后，其他错误处理方法不会再生效
+            ctx.body = 'error3';
+            ctx.status = 500;
+        },
+        html: function html(err, ctx) {
+            // html hander
+            ctx.body = '<h3>error3</h3>';
+            ctx.status = 500;
+        },
+        json: function json(err, ctx) {
+            // json hander
+            ctx.body = { status: 500, message: 'error' };
+            ctx.status = 500;
+        },
+        jsonp: function jsonp(err, ctx) {
+            // 一般来说，不需要特殊针对 jsonp 进行错误定义，jsonp 的错误处理会自动调用 json 错误处理，并包装成 jsonp 的响应格式
         }
     };
 

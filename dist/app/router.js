@@ -12,10 +12,14 @@ module.exports = function (app) {
       wallet = controller.wallet,
       miner = controller.miner,
       email = controller.email,
-      test = controller.test;
+      test = controller.test,
+      home = controller.home;
 
 
   var tokenCheck = middleware.tokenCheck();
+
+  router.get('/docs', home.docs); // 用户登录
+  router.get('/', home.docs); // 用户登录
 
   /**
    * 用户相关

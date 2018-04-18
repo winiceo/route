@@ -109,7 +109,10 @@ var deploy = {
         transport.log('Booting application...');
         transport.exec('EGG_SERVER_ENV=prod');
         // transport.exec(`pm2 delete ${application}`);
-        //transport.exec(`pm2 startOrRestart ${join(currentPath)}/ecosystem.json5 --env production`);
+        // transport.exec(`pm2 startOrRestart ${join(currentPath)}/ecosystem.json5 --env production`);
+
+        transport.exec(' npm stop');
+
         transport.exec(' npm start');
 
         // transport.with(`cd ${join(currentPath)}`, {silent: true}, function() {
@@ -119,7 +122,7 @@ var deploy = {
         // });
 
         transport.exec('pwd');
-        //transport.exec(`pm2 desc ${application}`);
+        // transport.exec(`pm2 desc ${application}`);
 
         // transport.exec(`NODE_ENV=production forever restart -c nodejs --spinSleepTime 10000 ${join(currentPath, 'index.js')} || NODE_ENV=production forever start -c nodejs --spinSleepTime 10000 ${join(currentPath, 'index.js')}`, { silent: true })
 

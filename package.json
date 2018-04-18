@@ -1,6 +1,6 @@
 {
-  "name": "cnode",
-  "version": "1.0.0",
+  "name": "beeroute",
+  "version": "0.0.1",
   "description": "",
   "private": true,
   "dependencies": {

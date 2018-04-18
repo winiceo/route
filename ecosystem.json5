@@ -1,0 +1,17 @@
+{
+
+  apps : [
+    {
+      name      : "pm_api",
+      script    : "index.js",
+      cwd: "/bpwall/pm_api/current/",
+      env: {
+        COMMON_VARIABLE: "true"
+      },
+      env_production : {
+        NODE_ENV: "production"
+      }
+    }
+
+  ]
+}

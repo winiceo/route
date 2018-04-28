@@ -43,6 +43,9 @@ Status: 200 OK
 | shares_1d | number | 矿机1天算力 |
 | shares_1d_unit | string | 矿机1天算力单位 |
 | earn_coin_1d | number | 1天收益 默认为Lrc |
+| yesterday_balance | number | 昨日收益 默认为Lrc |
+| lrc_cny | number | 昨日收益人民币估值 |
+| total_balance | number | 累计总收益 |
 
 
 
@@ -91,4 +94,11 @@ Status: 200 OK
     
 }
 ```
+ #### 输出字段说明
+  
+ | 名称 | 类型 | 描述 |
+ |:----:|:----:|----|
+   
+ | total_balance | number | 累计总收益 |
+ 
  

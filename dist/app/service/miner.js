@@ -62,24 +62,29 @@ var MinerService = function (_Service) {
                     offset = _ref2$offset === undefined ? 0 : _ref2$offset,
                     _ref2$limit = _ref2.limit,
                     limit = _ref2$limit === undefined ? 20 : _ref2$limit;
-                var assets;
+                var query, assets;
                 return regeneratorRuntime.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
-                                _context2.next = 2;
-                                return this.app.mysql.select('miner_shares', {
-                                    where: { miner_id: miner_id },
+                                query = {
+
                                     orders: [['datetime', 'desc']], // 排序方式
                                     limit: limit, // 返回数据量
                                     offset: offset // 数据偏移量
-                                });
+                                };
 
-                            case 2:
+                                if (miner_id != 0) {
+                                    query.where = { miner_id: miner_id };
+                                }
+                                _context2.next = 4;
+                                return this.app.mysql.select('miner_shares', query);
+
+                            case 4:
                                 assets = _context2.sent;
                                 return _context2.abrupt('return', assets);
 
-                            case 4:
+                            case 6:
                             case 'end':
                                 return _context2.stop();
                         }

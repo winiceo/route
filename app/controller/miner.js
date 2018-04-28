@@ -19,8 +19,19 @@ module.exports = app => {
             const uid = ctx.account.user_id;
 
             const assets = await service.miner.getByUserId(uid);
+            const data = {
+                assets: {
+                    'yesterday_balance':
+                        2.5,
+                    'lrc_cny':
+                        10.6,
+                    'total_balance':
+                        2343
+                },
+                data: assets
 
-            ret.data = assets;
+            };
+            ret.data = data;
             ctx.body = ret;
 
 
@@ -41,12 +52,23 @@ module.exports = app => {
                 data: {}
             };
 
-            const miner_shares = await service.miner.getSharesByMinerId({ miner_id: miner_id, offset: offset, limit: limit });
+            const miner_shares = await service.miner.getSharesByMinerId({
+                miner_id: miner_id,
+                offset: offset,
+                limit: limit
+            });
 
+            const data = {
+                assets: {
 
+                    'total_balance': 2343
+                },
+                data: miner_shares
+
+            };
             ret.status = 200;
 
-            ret.data = miner_shares;
+            ret.data = data;
             ctx.body = ret;
         }
 

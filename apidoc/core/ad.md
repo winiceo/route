@@ -9,21 +9,28 @@ POST /miner
 
 ```
 Status: 200 OK
+
 ```
 ```json
 {
     "status":200,
     "message":"",
-    "data": [
-         {
+    "data":{  
+         "assets":{
+            "yesterday_balance":2.5,
+            "lrc_cny":10.6,
+            "total_balance":2343
+         },
+         "data":[{
             "id":2,
             "miner_alias":"我的小蜜蜂", 
             "status": "INACTIVE",
             "shares_1d": 7.52,
             "shares_1d_unit": "T",
             "earn_coin_1d": 8.99
-	    }
+	    }]
     ]
+    }
     
 }
 ```
@@ -60,20 +67,27 @@ Status: 200 OK
 {
     "status":200,
     "message":"",
-    "data": [
-         {
-            "date": 1522119459,
-            "shares_1d": 7.52,
-            "shares_1d_unit": "T",
-            "earn_coin_1d": 8.99
-        },
-         {
-           "date": 1522119459,
-           "shares_1d": 7.52,
-           "shares_1d_unit": "T",
-           "earn_coin_1d": 8.99
-	    }
-    ]
+    "data":{
+            "assets":{
+                 
+                "total_balance":2343
+             },
+             "data":[
+    
+                 {
+                    "date": 1522119459,
+                    "shares_1d": 7.52,
+                    "shares_1d_unit": "T",
+                    "earn_coin_1d": 8.99
+                },
+                 {
+                   "date": 1522119459,
+                   "shares_1d": 7.52,
+                   "shares_1d_unit": "T",
+                   "earn_coin_1d": 8.99
+                }
+              ]
+    } 
     
 }
 ```

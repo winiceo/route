@@ -29,7 +29,7 @@ module.exports = function (app) {
             key: 'index',
             value: function () {
                 var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                    var ctx, service, config, ret, uid, assets;
+                    var ctx, service, config, ret, uid, assets, data;
                     return regeneratorRuntime.wrap(function _callee$(_context) {
                         while (1) {
                             switch (_context.prev = _context.next) {
@@ -46,12 +46,20 @@ module.exports = function (app) {
 
                                 case 5:
                                     assets = _context.sent;
+                                    data = {
+                                        assets: {
+                                            'yesterday_balance': 2.5,
+                                            'lrc_cny': 10.6,
+                                            'total_balance': 2343
+                                        },
+                                        data: assets
 
+                                    };
 
-                                    ret.data = assets;
+                                    ret.data = data;
                                     ctx.body = ret;
 
-                                case 8:
+                                case 9:
                                 case 'end':
                                     return _context.stop();
                             }
@@ -69,7 +77,7 @@ module.exports = function (app) {
             key: 'detail',
             value: function () {
                 var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                    var ctx, service, config, miner_id, params, page, limit, offset, ret, miner_shares;
+                    var ctx, service, config, miner_id, params, page, limit, offset, ret, miner_shares, data;
                     return regeneratorRuntime.wrap(function _callee2$(_context2) {
                         while (1) {
                             switch (_context2.prev = _context2.next) {
@@ -86,18 +94,29 @@ module.exports = function (app) {
                                         data: {}
                                     };
                                     _context2.next = 9;
-                                    return service.miner.getSharesByMinerId({ miner_id: miner_id, offset: offset, limit: limit });
+                                    return service.miner.getSharesByMinerId({
+                                        miner_id: miner_id,
+                                        offset: offset,
+                                        limit: limit
+                                    });
 
                                 case 9:
                                     miner_shares = _context2.sent;
+                                    data = {
+                                        assets: {
 
+                                            'total_balance': 2343
+                                        },
+                                        data: miner_shares
+
+                                    };
 
                                     ret.status = 200;
 
-                                    ret.data = miner_shares;
+                                    ret.data = data;
                                     ctx.body = ret;
 
-                                case 13:
+                                case 14:
                                 case 'end':
                                     return _context2.stop();
                             }

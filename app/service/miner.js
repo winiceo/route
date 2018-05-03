@@ -51,10 +51,12 @@ class MinerService extends Service {
 
 
     async getSharesByMinerId({ miner_id, offset = 0, limit = 20 }) {
+        const { ctx } = this;
 
+        const uid = ctx.account.user_id;
 
         let query = {
-
+            where: { user_id: uid },
             orders: [['datetime', 'desc']], // 排序方式
             limit: limit, // 返回数据量
             offset: offset // 数据偏移量

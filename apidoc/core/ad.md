@@ -23,6 +23,7 @@ Status: 200 OK
          },
          "data":[{
             "id":2,
+            "miner_id": "miner312",
             "miner_alias":"我的小蜜蜂", 
             "status": "INACTIVE",
             "shares_1d": 7.52,
@@ -33,6 +34,8 @@ Status: 200 OK
     }
     
 }
+
+ 
 ```
 #### 输出字段说明
  

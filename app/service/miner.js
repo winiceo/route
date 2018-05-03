@@ -23,20 +23,32 @@ class MinerService extends Service {
                         orders: [['id', 'desc']],
                         limit: 1
                     });
-                    if (res) {
+                    let minerInfo = {
+                        id: obj.id,
+                        miner_id: obj.miner_id,
+                        miner_alias: obj.miner_alias,
+                        status: res.status,
+                        shares_1d: res.shares_1d,
+                        shares_1d_unit: res.shares_1d_unit,
+                        earn_coin_1d: res.earn_coin_1d
+                    };
+                    if (res !== undefined && res.length == 1) {
                         res = res[0];
-                        let minerInfo = {
-                            id: obj.id,
-                            miner_id: obj.miner_id,
-                            miner_alias: obj.miner_alias,
-                            status: res.status,
+                        minerInfo = Object.assign(minerInfo, {
+                            status: 1,
                             shares_1d: res.shares_1d,
                             shares_1d_unit: res.shares_1d_unit,
                             earn_coin_1d: res.earn_coin_1d
-                        };
-                        data.push(minerInfo);
-
+                        });
+                    } else {
+                        minerInfo = Object.assign(minerInfo, {
+                            status: 0,
+                            shares_1d: 0,
+                            shares_1d_unit: 'T',
+                            earn_coin_1d: 0
+                        });
                     }
+                    data.push(minerInfo);
 
                 })
             );

@@ -1,6 +1,6 @@
 
 const Service = require('egg').Service;
-
+const _ = require('lodash');
 class MinerService extends Service {
 
 
@@ -10,7 +10,43 @@ class MinerService extends Service {
         const assets = await this.app.mysql.select('miner', {
             where: { user_id: user_id }
         });
-        return assets;
+
+        let data = [];
+
+
+
+        const start = async () => {
+            await Promise.all(
+                assets.map(async obj => {
+                    let res = await this.app.mysql.select('miner_shares', {
+                        where: { miner_id: obj.miner_id },
+                        orders: [['id', 'desc']],
+                        limit: 1
+                    });
+                    if (res) {
+                        res = res[0];
+                        let minerInfo = {
+                            id: obj.id,
+                            miner_id: obj.miner_id,
+                            miner_alias: obj.miner_alias,
+                            status: res.status,
+                            shares_1d: res.shares_1d,
+                            shares_1d_unit: res.shares_1d_unit,
+                            earn_coin_1d: res.earn_coin_1d
+                        };
+                        data.push(minerInfo);
+
+                    }
+
+                })
+            );
+
+            return data;
+        };
+        const result = start();
+        return result;
+
+
     }
 
 

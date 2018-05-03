@@ -136,13 +136,13 @@ module.exports = function (appInfo) {
         // 单数据库信息配置
         'client': {
             // host
-            'host': 'localhost',
+            'host': '114.115.151.10',
             // 端口号
             'port': '3306',
             // 用户名
-            'user': 'root',
+            'user': 'pmker',
             // 密码
-            'password': '',
+            'password': 'Pmker.com',
             // 数据库名
             'database': 'route'
         },

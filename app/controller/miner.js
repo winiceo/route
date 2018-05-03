@@ -45,7 +45,7 @@ module.exports = app => {
             const page = parseInt(params.page) || 1;
             const limit = 20;
             const offset = (page - 1) * limit;
-            
+
             const ret = {
                 status: 422,
                 message: '',

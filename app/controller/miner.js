@@ -42,9 +42,11 @@ module.exports = app => {
             const { ctx, service, config } = this;
             const miner_id = ctx.params.miner_id;
             const params = ctx.request.query;
-            const page = parseInt(params.page) || 1;
-            const limit = 20;
-            const offset = (page - 1) * limit;
+            let page = parseInt(params.page) || 1;
+            const pageSize = 20;
+            if (page < 1) {
+                page = 1;
+            }
 
             const ret = {
                 status: 422,
@@ -52,23 +54,19 @@ module.exports = app => {
                 data: {}
             };
 
+            console.log(page);
+
+
             const miner_shares = await service.miner.getSharesByMinerId({
                 miner_id: miner_id,
-                offset: offset,
-                limit: limit
+                pageNumber: page,
+                pageSize: pageSize
             });
 
-            const data = {
-                assets: {
 
-                    'total_balance': 2343
-                },
-                data: miner_shares
-
-            };
             ret.status = 200;
 
-            ret.data = data;
+            ret.data = miner_shares;
             ctx.body = ret;
         }
 

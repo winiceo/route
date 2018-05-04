@@ -144,11 +144,11 @@ var MinerService = function (_Service) {
         value: function () {
             var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(_ref4) {
                 var miner_id = _ref4.miner_id,
-                    _ref4$offset = _ref4.offset,
-                    offset = _ref4$offset === undefined ? 0 : _ref4$offset,
-                    _ref4$limit = _ref4.limit,
-                    limit = _ref4$limit === undefined ? 20 : _ref4$limit;
-                var ctx, uid, query, assets;
+                    _ref4$pageNumber = _ref4.pageNumber,
+                    pageNumber = _ref4$pageNumber === undefined ? 1 : _ref4$pageNumber,
+                    _ref4$pageSize = _ref4.pageSize,
+                    pageSize = _ref4$pageSize === undefined ? 20 : _ref4$pageSize;
+                var ctx, uid, query, result, totalCount;
                 return regeneratorRuntime.wrap(function _callee4$(_context4) {
                     while (1) {
                         switch (_context4.prev = _context4.next) {
@@ -156,23 +156,42 @@ var MinerService = function (_Service) {
                                 ctx = this.ctx;
                                 uid = ctx.account.user_id;
                                 query = {
-                                    where: { user_id: uid },
-                                    orders: [['datetime', 'desc']], // 排序方式
-                                    limit: limit, // 返回数据量
-                                    offset: offset // 数据偏移量
+                                    user_id: uid
                                 };
 
-                                if (miner_id != 0) {
-                                    query.where = { miner_id: miner_id };
+                                if (miner_id !== "0") {
+                                    query.miner_id = miner_id;
                                 }
+
                                 _context4.next = 6;
-                                return this.app.mysql.select('miner_shares', query);
+                                return this.app.mysql.select('miner_shares', {
+                                    where: query,
+                                    limit: Number(pageSize), // 返回数据量
+                                    offset: (pageNumber - 1) * pageSize, // 数据偏移量
+                                    orders: [['datetime', 'desc']] // 排序方式
+                                });
 
                             case 6:
-                                assets = _context4.sent;
-                                return _context4.abrupt('return', assets);
+                                result = _context4.sent;
+                                _context4.next = 9;
+                                return this.app.mysql.count('miner_shares', query);
 
-                            case 8:
+                            case 9:
+                                totalCount = _context4.sent;
+                                return _context4.abrupt('return', {
+                                    assets: {
+                                        'total_balance': 2343
+                                    },
+                                    data: result,
+                                    page: {
+                                        'current_page': Number(pageNumber),
+                                        'total_page': Math.ceil(result.length / pageSize),
+                                        'total': totalCount
+                                    }
+
+                                });
+
+                            case 11:
                             case 'end':
                                 return _context4.stop();
                         }

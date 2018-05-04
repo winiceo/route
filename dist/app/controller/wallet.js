@@ -123,31 +123,40 @@ module.exports = function (app) {
             key: 'withdrawHistory',
             value: function () {
                 var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-                    var ctx, service, config, ret, user_id, withdrawList;
+                    var ctx, service, config, params, page, pageSize, ret, user_id, withdrawList;
                     return regeneratorRuntime.wrap(function _callee3$(_context3) {
                         while (1) {
                             switch (_context3.prev = _context3.next) {
                                 case 0:
                                     ctx = this.ctx, service = this.service, config = this.config;
+                                    params = ctx.request.query;
+                                    page = parseInt(params.page) || 1;
+                                    pageSize = 20;
+
+                                    if (page < 1) {
+                                        page = 1;
+                                    }
+
                                     ret = {
                                         status: 200,
                                         message: '',
                                         data: {}
                                     };
                                     user_id = ctx.account.user_id;
-                                    _context3.next = 5;
+                                    _context3.next = 9;
                                     return service.withdraw.findAll({
-                                        user_id: user_id
 
+                                        pageNumber: page,
+                                        pageSize: pageSize
                                     });
 
-                                case 5:
+                                case 9:
                                     withdrawList = _context3.sent;
 
                                     ret.data = withdrawList;
                                     ctx.body = ret;
 
-                                case 8:
+                                case 12:
                                 case 'end':
                                     return _context3.stop();
                             }

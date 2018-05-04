@@ -12,16 +12,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var Service = require('egg').Service;
 
-var AssetService = function (_Service) {
-    _inherits(AssetService, _Service);
+var WithdrawService = function (_Service) {
+    _inherits(WithdrawService, _Service);
 
-    function AssetService() {
-        _classCallCheck(this, AssetService);
+    function WithdrawService() {
+        _classCallCheck(this, WithdrawService);
 
-        return _possibleConstructorReturn(this, (AssetService.__proto__ || Object.getPrototypeOf(AssetService)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (WithdrawService.__proto__ || Object.getPrototypeOf(WithdrawService)).apply(this, arguments));
     }
 
-    _createClass(AssetService, [{
+    _createClass(WithdrawService, [{
         key: 'newAndSave',
         value: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(data) {
@@ -54,20 +54,47 @@ var AssetService = function (_Service) {
     }, {
         key: 'findAll',
         value: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(query) {
-                var ret;
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(_ref2) {
+                var _ref2$pageNumber = _ref2.pageNumber,
+                    pageNumber = _ref2$pageNumber === undefined ? 1 : _ref2$pageNumber,
+                    _ref2$pageSize = _ref2.pageSize,
+                    pageSize = _ref2$pageSize === undefined ? 20 : _ref2$pageSize;
+                var ctx, uid, query, result, totalCount;
                 return regeneratorRuntime.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
-                                _context2.next = 2;
-                                return this.app.mysql.select('withdraw', { where: query });
+                                ctx = this.ctx;
+                                uid = ctx.account.user_id;
+                                query = {
+                                    user_id: uid
+                                };
+                                _context2.next = 5;
+                                return this.app.mysql.select('withdraw', {
+                                    where: query,
+                                    limit: Number(pageSize), // 返回数据量
+                                    offset: (pageNumber - 1) * pageSize, // 数据偏移量
+                                    orders: [['created_at', 'desc']] // 排序方式
+                                });
 
-                            case 2:
-                                ret = _context2.sent;
-                                return _context2.abrupt('return', ret);
+                            case 5:
+                                result = _context2.sent;
+                                _context2.next = 8;
+                                return this.app.mysql.count('withdraw', query);
 
-                            case 4:
+                            case 8:
+                                totalCount = _context2.sent;
+                                return _context2.abrupt('return', {
+                                    data: result,
+                                    page: {
+                                        'current_page': Number(pageNumber),
+                                        'total_page': Math.ceil(result.length / pageSize),
+                                        'total': totalCount
+                                    }
+
+                                });
+
+                            case 10:
                             case 'end':
                                 return _context2.stop();
                         }
@@ -76,15 +103,15 @@ var AssetService = function (_Service) {
             }));
 
             function findAll(_x2) {
-                return _ref2.apply(this, arguments);
+                return _ref3.apply(this, arguments);
             }
 
             return findAll;
         }()
     }]);
 
-    return AssetService;
+    return WithdrawService;
 }(Service);
 
-module.exports = AssetService;
+module.exports = WithdrawService;
 //# sourceMappingURL=withdraw.js.map

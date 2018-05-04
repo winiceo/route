@@ -62,22 +62,39 @@ class MinerService extends Service {
     }
 
 
-    async getSharesByMinerId({ miner_id, offset = 0, limit = 20 }) {
+    async getSharesByMinerId({ miner_id, pageNumber = 1, pageSize = 20 }) {
         const { ctx } = this;
 
         const uid = ctx.account.user_id;
 
         let query = {
-            where: { user_id: uid },
-            orders: [['datetime', 'desc']], // 排序方式
-            limit: limit, // 返回数据量
-            offset: offset // 数据偏移量
+            user_id: uid
         };
-        if (miner_id != 0) {
-            query.where = { miner_id: miner_id };
+        if (miner_id !== "0") {
+            query.miner_id = miner_id;
         }
-        const assets = await this.app.mysql.select('miner_shares', query);
-        return assets;
+
+        let result = await this.app.mysql.select('miner_shares', {
+            where: query,
+            limit: Number(pageSize),    // 返回数据量
+            offset: (pageNumber - 1) * pageSize, // 数据偏移量
+            orders: [['datetime', 'desc']] // 排序方式
+        });
+
+        const totalCount = await this.app.mysql.count('miner_shares', query);
+
+        return {
+            assets: {
+                'total_balance': 2343
+            },
+            data: result,
+            page: {
+                'current_page': Number(pageNumber),
+                'total_page': Math.ceil(result.length / pageSize),
+                'total': totalCount
+            }
+
+        };
     }
 
 

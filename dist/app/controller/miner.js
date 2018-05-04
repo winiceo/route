@@ -77,7 +77,7 @@ module.exports = function (app) {
             key: 'detail',
             value: function () {
                 var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                    var ctx, service, config, miner_id, params, page, limit, offset, ret, miner_shares, data;
+                    var ctx, service, config, miner_id, params, page, pageSize, ret, miner_shares;
                     return regeneratorRuntime.wrap(function _callee2$(_context2) {
                         while (1) {
                             switch (_context2.prev = _context2.next) {
@@ -86,34 +86,35 @@ module.exports = function (app) {
                                     miner_id = ctx.params.miner_id;
                                     params = ctx.request.query;
                                     page = parseInt(params.page) || 1;
-                                    limit = 20;
-                                    offset = (page - 1) * limit;
+                                    pageSize = 20;
+
+                                    if (page < 1) {
+                                        page = 1;
+                                    }
+
                                     ret = {
                                         status: 422,
                                         message: '',
                                         data: {}
                                     };
-                                    _context2.next = 9;
+
+
+                                    console.log(page);
+
+                                    _context2.next = 10;
                                     return service.miner.getSharesByMinerId({
                                         miner_id: miner_id,
-                                        offset: offset,
-                                        limit: limit
+                                        pageNumber: page,
+                                        pageSize: pageSize
                                     });
 
-                                case 9:
+                                case 10:
                                     miner_shares = _context2.sent;
-                                    data = {
-                                        assets: {
 
-                                            'total_balance': 2343
-                                        },
-                                        data: miner_shares
-
-                                    };
 
                                     ret.status = 200;
 
-                                    ret.data = data;
+                                    ret.data = miner_shares;
                                     ctx.body = ret;
 
                                 case 14:

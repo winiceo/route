@@ -56,6 +56,15 @@ module.exports = app => {
         async withdrawHistory() {
             const { ctx, service, config } = this;
 
+
+
+            const params = ctx.request.query;
+            let page = parseInt(params.page) || 1;
+            const pageSize = 20;
+            if (page < 1) {
+                page = 1;
+            }
+
             const ret = {
                 status: 200,
                 message: '',
@@ -67,8 +76,9 @@ module.exports = app => {
 
 
             const withdrawList = await service.withdraw.findAll({
-                user_id: user_id
 
+                pageNumber: page,
+                pageSize: pageSize
             });
             ret.data = withdrawList;
             ctx.body = ret;

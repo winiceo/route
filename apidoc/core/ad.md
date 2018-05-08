@@ -55,7 +55,7 @@ Status: 200 OK
 ## 获取单个矿机收益明细
 
 ```
-POST /miner/{id}
+POST /miner/{id}?page=1
 ```
 
 #### 请求参数
@@ -63,6 +63,8 @@ POST /miner/{id}
 | 名称 | 类型 | 描述 |
 |:----:|:----:|----|
 | id | int | 矿机id |
+| page | int | 分页，默认为1 |
+
 
 #### 响应
 
@@ -71,30 +73,50 @@ Status: 200 OK
 ```
 ```json
 {
-    "status":200,
-    "message":"",
-    "data":{
-            "assets":{
-                 
-                "total_balance":2343
-             },
-             "data":[
-    
-                 {
-                    "date": 1522119459,
-                    "shares_1d": 7.52,
-                    "shares_1d_unit": "T",
-                    "earn_coin_1d": 8.99
-                },
-                 {
-                   "date": 1522119459,
-                   "shares_1d": 7.52,
-                   "shares_1d_unit": "T",
-                   "earn_coin_1d": 8.99
-                }
-              ]
-    } 
-    
+    "status": 200,
+    "message": "",
+    "data": {
+        "assets": {
+            "total_balance": 2343
+        },
+        "data": [
+            {
+                "id": 37,
+                "miner_id": "miner21",
+                "status": 0,
+                "shares_1d": 2,
+                "shares_1d_unit": "T",
+                "earn_coin_1d": 2,
+                "user_id": 39,
+                "datetime": null
+            },
+            {
+                "id": 38,
+                "miner_id": "miner21",
+                "status": 0,
+                "shares_1d": 2,
+                "shares_1d_unit": "T",
+                "earn_coin_1d": 2,
+                "user_id": 39,
+                "datetime": null
+            },
+            {
+                "id": 39,
+                "miner_id": "miner312",
+                "status": 0,
+                "shares_1d": 2,
+                "shares_1d_unit": "T",
+                "earn_coin_1d": 2,
+                "user_id": 39,
+                "datetime": null
+            }
+        ],
+        "page": {
+            "current_page": 1,
+            "total_page": 1,
+            "total": 3
+        }
+    }
 }
 ```
  #### 输出字段说明

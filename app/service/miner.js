@@ -90,7 +90,7 @@ class MinerService extends Service {
             data: result,
             page: {
                 'current_page': Number(pageNumber),
-                'total_page': Math.ceil(result.length / pageSize),
+                'total_page': Math.ceil(totalCount / pageSize),
                 'total': totalCount
             }
 

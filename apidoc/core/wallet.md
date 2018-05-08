@@ -125,30 +125,28 @@ Status: 200 OK
 
 ```json5
 {
-    "status":200,
-    "message":"",
+    "status": 200,
+    "message": "",
     "data": {
-        "data":[
-                     {
-                         "id": 23, 
-                         "coin_type": "lrc",
-                         "address": "0xf4897b18a8626e58ce49985122d520c4462d4cecdc0259d7",
-                         "amount": 333.3,
-                         "txid": "0xf4897b18a8626e58ce49985122d520c44697b3d52ebeeac8e62d4cecdc0259d7",
-                         "finish_time": null,
-                         "status": 0,
-                         "created_at": 1522119459,
-                        
-                     },
-                     ……
-         ],
-         "page":{
-             "current_page": 1, 
-             "total_page": 4
-         
-         }
-    
+        "data": [
+            {
+                "id": 16,
+                "user_id": 39,
+                "coin_type": "lrc",
+                "address": "0xf4897b18a8626e58ce49985122d520c4462d4cecdc0259d7",
+                "amount": 333,
+                "txid": null,
+                "finish_time": null,
+                "status": 0,
+                "created_at": null,
+                "updated_at": null
+            }
+        ],
+        "page": {
+            "current_page": 1,
+            "total_page": 1,
+            "total": 1
+        }
     }
-   
 }
 ```

@@ -85,7 +85,7 @@ module.exports = function (app) {
                                     ctx = this.ctx, service = this.service, config = this.config;
                                     miner_id = ctx.params.miner_id;
                                     params = ctx.request.query;
-                                    page = parseInt(params.page) || 1;
+                                    page = parseInt(ctx.request.body.page) || 1;
                                     pageSize = 20;
 
                                     if (page < 1) {

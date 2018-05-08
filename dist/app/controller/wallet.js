@@ -130,7 +130,7 @@ module.exports = function (app) {
                                 case 0:
                                     ctx = this.ctx, service = this.service, config = this.config;
                                     params = ctx.request.query;
-                                    page = parseInt(params.page) || 1;
+                                    page = parseInt(ctx.request.body.page) || 1;
                                     pageSize = 20;
 
                                     if (page < 1) {

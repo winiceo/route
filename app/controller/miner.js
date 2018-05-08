@@ -42,7 +42,7 @@ module.exports = app => {
             const { ctx, service, config } = this;
             const miner_id = ctx.params.miner_id;
             const params = ctx.request.query;
-            let page = parseInt(params.page) || 1;
+            let page = parseInt(ctx.request.body.page) || 1;
             const pageSize = 20;
             if (page < 1) {
                 page = 1;

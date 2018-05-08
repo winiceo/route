@@ -59,7 +59,7 @@ module.exports = app => {
 
 
             const params = ctx.request.query;
-            let page = parseInt(params.page) || 1;
+            let page = parseInt(ctx.request.body.page) || 1;
             const pageSize = 20;
             if (page < 1) {
                 page = 1;

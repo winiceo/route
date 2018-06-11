@@ -70,6 +70,29 @@ module.exports = app => {
             ctx.body = ret;
         }
 
+        async rename() {
+            const { ctx, service, config } = this;
+            const id = ctx.request.body.id;
+            const miner_alias = ctx.request.body.miner_alias;
+
+            const ret = {
+                status: 422,
+                message: '',
+                data: {}
+            };
+
+
+            const miner_shares = await service.miner.rename({
+                id: id,
+                miner_alias: miner_alias
+            });
+
+
+            ret.status = 200;
+            ret.message = "修改成功";
+            ctx.body = ret;
+        }
+
 
     }
 

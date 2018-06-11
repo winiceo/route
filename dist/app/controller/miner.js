@@ -131,6 +131,51 @@ module.exports = function (app) {
 
                 return detail;
             }()
+        }, {
+            key: 'rename',
+            value: function () {
+                var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+                    var ctx, service, config, id, miner_alias, ret, miner_shares;
+                    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                        while (1) {
+                            switch (_context3.prev = _context3.next) {
+                                case 0:
+                                    ctx = this.ctx, service = this.service, config = this.config;
+                                    id = ctx.request.body.id;
+                                    miner_alias = ctx.request.body.miner_alias;
+                                    ret = {
+                                        status: 422,
+                                        message: '',
+                                        data: {}
+                                    };
+                                    _context3.next = 6;
+                                    return service.miner.rename({
+                                        id: id,
+                                        miner_alias: miner_alias
+                                    });
+
+                                case 6:
+                                    miner_shares = _context3.sent;
+
+
+                                    ret.status = 200;
+                                    ret.message = "修改成功";
+                                    ctx.body = ret;
+
+                                case 10:
+                                case 'end':
+                                    return _context3.stop();
+                            }
+                        }
+                    }, _callee3, this);
+                }));
+
+                function rename() {
+                    return _ref3.apply(this, arguments);
+                }
+
+                return rename;
+            }()
         }]);
 
         return MinerController;

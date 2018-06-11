@@ -41,6 +41,8 @@ module.exports = function (app) {
    * miner相关
    */
   router.post(apipre + '/miner', tokenCheck, miner.index);
+  router.post(apipre + '/miner/rename', tokenCheck, miner.rename);
+
   router.post(apipre + '/miner/:miner_id', tokenCheck, miner.detail);
 
   /**

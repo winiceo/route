@@ -159,7 +159,7 @@ var MinerService = function (_Service) {
                                     user_id: uid
                                 };
 
-                                if (miner_id !== "0") {
+                                if (miner_id !== '0') {
                                     query.miner_id = miner_id;
                                 }
 
@@ -204,6 +204,36 @@ var MinerService = function (_Service) {
             }
 
             return getSharesByMinerId;
+        }()
+    }, {
+        key: 'rename',
+        value: function () {
+            var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(data) {
+                var ret;
+                return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                    while (1) {
+                        switch (_context5.prev = _context5.next) {
+                            case 0:
+                                _context5.next = 2;
+                                return this.app.mysql.update('miner', data, { where: { id: data.id } });
+
+                            case 2:
+                                ret = _context5.sent;
+                                return _context5.abrupt('return', ret);
+
+                            case 4:
+                            case 'end':
+                                return _context5.stop();
+                        }
+                    }
+                }, _callee5, this);
+            }));
+
+            function rename(_x4) {
+                return _ref6.apply(this, arguments);
+            }
+
+            return rename;
         }()
     }]);
 

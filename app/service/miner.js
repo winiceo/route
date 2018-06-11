@@ -70,7 +70,7 @@ class MinerService extends Service {
         let query = {
             user_id: uid
         };
-        if (miner_id !== "0") {
+        if (miner_id !== '0') {
             query.miner_id = miner_id;
         }
 
@@ -95,6 +95,13 @@ class MinerService extends Service {
             }
 
         };
+    }
+
+    async rename(data) {
+
+        const ret = await this.app.mysql.update('miner', data, { where: { id: data.id }});
+
+        return ret;
     }
 
 
